@@ -1,4 +1,4 @@
-package com.jp.blueddit
+package com.jp.blueddit.ui.view
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
