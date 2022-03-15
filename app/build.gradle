@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android-extensions'
 }
 
 android {
@@ -56,6 +57,7 @@ dependencies {
 
     implementation 'androidx.activity:activity-compose:1.4.0'
     implementation "com.google.accompanist:accompanist-swiperefresh:0.17.0"
+    implementation group: 'androidx.lifecycle', name: 'lifecycle-extensions', version: '2.2.0'
 
     // Retrofit dependencies
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'

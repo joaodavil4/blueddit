@@ -8,5 +8,6 @@ import retrofit2.http.Query
 interface RetrofitInterface {
 
     @GET(RetrofitConstants.URL)
-    suspend fun getPosts(@Query("") page:Int) : Response<List<Post?>>
+    suspend fun getPosts(@Query("after") skip:Int,
+                         @Query("limit") limit: Int) : List<Post>
 }

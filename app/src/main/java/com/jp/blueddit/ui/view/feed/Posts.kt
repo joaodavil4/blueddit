@@ -18,7 +18,7 @@ import com.jp.blueddit.ui.compositions.PostItem
 
 
 @Composable
-fun ListOfPosts(
+fun Posts(
     pageIndex: Int,
     viewModel: FeedViewModel
 ) {

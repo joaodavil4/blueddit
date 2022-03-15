@@ -3,18 +3,20 @@ package com.jp.blueddit.ui.view.feed
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.jp.blueddit.model.Post
+import com.jp.blueddit.service.PostRepository
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class FeedViewModel(override val coroutineContext: CoroutineContext) : ViewModel(), CoroutineScope {
+class FeedViewModel(override val coroutineContext: CoroutineContext, private val repository: PostRepository) : ViewModel(), CoroutineScope {
     private val _posts = arrayListOf<Post>()
 
     var isRefreshing = MutableLiveData(false)
     var lazyListState: LazyListState? = null
     val posts = MutableLiveData<List<Post>>(listOf())
-    //val feedScreenState = MutableLiveData(FeedListStates.NORMAL)
     var reachEnd = false
     var lockRequest = false
     var skip = 0
@@ -35,9 +37,9 @@ class FeedViewModel(override val coroutineContext: CoroutineContext) : ViewModel
     private suspend fun loadInitialItems() {
 
         runCatching {
-
+            repository.getApiData(skip)
         }.onSuccess {
-
+            addPosts(it)
         }.onFailure {
             //TODO
         }
@@ -45,7 +47,7 @@ class FeedViewModel(override val coroutineContext: CoroutineContext) : ViewModel
 
     private suspend fun loadMore() {
         runCatching {
-
+            repository.getApiData(skip)
         }.onSuccess {
             if (it.isEmpty()) {
                 reachEnd = true
@@ -55,6 +57,15 @@ class FeedViewModel(override val coroutineContext: CoroutineContext) : ViewModel
         }
         isRefreshing.value = false
 
+    }
+
+    private fun addPosts(list: List<Post>) {
+        launch {
+            val filtered = list.filter { !_posts.contains(it) }
+            skip += list.size
+            _posts.addAll(filtered)
+            posts.value = _posts.toList()
+        }
     }
 
     fun refresh() {
@@ -70,6 +81,12 @@ class FeedViewModel(override val coroutineContext: CoroutineContext) : ViewModel
         posts.value = _posts.toList()
     }
 
-
-
+    @Suppress("UNCHECKED_CAST")
+    class FeedFactory(
+        private val repository: PostRepository
+    ) : ViewModelProvider.Factory{
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return FeedViewModel(Dispatchers.Main, repository) as T
+        }
+    }
 }
