@@ -39,8 +39,10 @@ class FeedViewModel(override val coroutineContext: CoroutineContext, private val
         runCatching {
             repository.getApiData(skip)
         }.onSuccess {
-            addPosts(it)
+            addPosts(it.body() as List<Post>)
         }.onFailure {
+            it.localizedMessage
+            val r = 0
             //TODO
         }
     }
@@ -49,10 +51,11 @@ class FeedViewModel(override val coroutineContext: CoroutineContext, private val
         runCatching {
             repository.getApiData(skip)
         }.onSuccess {
-            if (it.isEmpty()) {
+            val list = it.body() as List<Post>
+            if (list.isEmpty()) {
                 reachEnd = true
             } else {
-                addPosts(it)
+                addPosts(list)
             }
         }
         isRefreshing.value = false

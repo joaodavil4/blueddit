@@ -7,8 +7,8 @@ import retrofit2.Response
 
 class PostRepositoryClass : PostRepository {
 
-    override suspend fun getApiData(page: Int): List<Post> {
-        return withContext(Dispatchers.Default) {
+    override suspend fun getApiData(page: Int): Response<List<Post>> {
+        return withContext(Dispatchers.Main) {
             val retrofitClient = RetrofitUtils
                 .getRetrofitInstance(RetrofitConstants.URL)
             val endpoint = retrofitClient.create(RetrofitInterface::class.java)

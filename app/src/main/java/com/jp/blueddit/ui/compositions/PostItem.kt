@@ -38,14 +38,10 @@ import kotlinx.coroutines.launch
 @Composable
 private fun Preview() {
 
-    val post = Post(
-        objectId = "sdadasd",
-        medias = "",
-        text = "test",
-        postedBy = "Test",
-        createdAt = "2021-09-09T17:19:17.015Z"
-    )
-    PostItem(post = post)
+//    val post = Post(
+//        postedBy = "Test"
+//    )
+//    PostItem(post = post)
 }
 
 @OptIn(ExperimentalAnimationApi::class)

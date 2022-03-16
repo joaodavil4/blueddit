@@ -26,10 +26,13 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
+                    Text(text = "teste")
                     val repositoryClass = PostRepositoryClass()
-                    Posts(pageIndex = 0, viewModel = ViewModelProvider(
+                    val viewModel = ViewModelProvider(
                         this,
-                        FeedViewModel.FeedFactory(repositoryClass))[FeedViewModel::class.java])
+                        FeedViewModel.FeedFactory(repositoryClass))[FeedViewModel::class.java]
+                    viewModel.loadItems(true)
+                    Posts(pageIndex = 0, viewModel = viewModel)
                 }
             }
         }
