@@ -8,8 +8,10 @@ import retrofit2.http.Query
 
 interface RetrofitInterface {
 
-    @Headers("Content-Type: application/json")
-    @GET(RetrofitConstants.URL)
+    @GET(RetrofitConstants.POST_API_GET)
     suspend fun getPosts(@Query("after") skip:Int,
-                         @Query("limit") limit: Int) : Response<List<Post>>
+                         @Query("limit") limit: Int) : Response<RedditNewsResponse>
+
+    @GET(RetrofitConstants.POST_API_GET)
+    suspend fun getPosts() : Response<List<RedditNewsResponse>>
 }

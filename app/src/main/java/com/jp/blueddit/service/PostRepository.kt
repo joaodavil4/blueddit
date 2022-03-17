@@ -5,7 +5,7 @@ import retrofit2.Response
 
 interface PostRepository {
 
-    suspend fun getApiData(page: Int): Response<List<Post>> {
-        return Response.success(listOf())
+    suspend fun getApiData(page: Int): Response<RedditNewsResponse> {
+        return Response.success(null)
     }
 }

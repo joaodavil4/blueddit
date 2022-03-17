@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.jp.blueddit.model.Post
 import com.jp.blueddit.service.PostRepository
+import com.jp.blueddit.service.RedditChildrenResponse
+import com.jp.blueddit.service.RedditNewsResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -39,11 +41,10 @@ class FeedViewModel(override val coroutineContext: CoroutineContext, private val
         runCatching {
             repository.getApiData(skip)
         }.onSuccess {
-            addPosts(it.body() as List<Post>)
+            addPosts(it.body()?.data?.children?.map(RedditChildrenResponse::data)!!)
         }.onFailure {
             it.localizedMessage
-            val r = 0
-            //TODO
+
         }
     }
 
@@ -51,7 +52,7 @@ class FeedViewModel(override val coroutineContext: CoroutineContext, private val
         runCatching {
             repository.getApiData(skip)
         }.onSuccess {
-            val list = it.body() as List<Post>
+            val list = (it.body()?.data?.children?.map(RedditChildrenResponse::data)!!)
             if (list.isEmpty()) {
                 reachEnd = true
             } else {

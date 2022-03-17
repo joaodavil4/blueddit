@@ -7,7 +7,7 @@ import retrofit2.Response
 
 class PostRepositoryClass : PostRepository {
 
-    override suspend fun getApiData(page: Int): Response<List<Post>> {
+    override suspend fun getApiData(page: Int): Response<RedditNewsResponse> {
         return withContext(Dispatchers.Main) {
             val retrofitClient = RetrofitUtils
                 .getRetrofitInstance(RetrofitConstants.URL)
