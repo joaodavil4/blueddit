@@ -1,6 +1,7 @@
 package com.jp.blueddit.ui.view.feed
 
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -22,6 +23,9 @@ class FeedViewModel(override val coroutineContext: CoroutineContext, private val
     var reachEnd = false
     var lockRequest = false
     var skip = 0
+
+    var showFullscreenImage = MutableLiveData<Boolean>()
+    var showFullscrenImageUrl = MutableLiveData<String>()
 
     fun loadItems(init: Boolean) {
         if (lockRequest) return

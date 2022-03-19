@@ -10,10 +10,10 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.jp.blueddit.ui.compositions.FullScreenDialog
 import com.jp.blueddit.ui.compositions.PostItem
 
 
@@ -25,6 +25,16 @@ fun Posts(
     if (viewModel.lazyListState == null) {
         viewModel.lazyListState = rememberLazyListState()
     }
+
+    val showFullImage by viewModel.showFullscreenImage.observeAsState(false)
+    val showFullImageUrl by viewModel.showFullscrenImageUrl.observeAsState("")
+
+    FullScreenDialog(
+        showDialog = showFullImage,
+        onClose = { },
+        imageUrl = showFullImageUrl,
+        onIconClick = { viewModel.showFullscreenImage.value = false }
+    )
 
     val isRefreshing by viewModel.isRefreshing.observeAsState(false)
     val posts by viewModel.posts.observeAsState(listOf())
@@ -46,7 +56,11 @@ fun Posts(
                 }
 
                 PostItem(
-                    post = item
+                    post = item,
+                    onProfileClickTap = {
+                        viewModel.showFullscreenImage.value = true
+                        viewModel.showFullscrenImageUrl.value = item.thumbnail
+                    }
                 )
             }
         }
