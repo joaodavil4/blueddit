@@ -5,7 +5,11 @@
       <map>
         <entry key="../../../../layout/compose-model-1647094620358.xml" value="0.3125" />
         <entry key="../../../../layout/compose-model-1647180803531.xml" value="0.5" />
+        <entry key="../../../../layout/compose-model-1647485967249.xml" value="2.0" />
+        <entry key="../../../../layout/compose-model-1647652293510.xml" value="0.33" />
+        <entry key="app/src/main/res/drawable/ic_comment.xml" value="0.1995" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/ic_new.xml" value="0.2645" />
         <entry key="app/src/main/res/drawable/ic_post_placeholder.xml" value="0.2645" />
       </map>
     </option>

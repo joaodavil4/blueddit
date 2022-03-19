@@ -12,6 +12,5 @@ data class Post(
     val title: String,
     val thumbnail: String,
     val num_comments: Int,
-    val postedBy: String,
     val created_utc: Int
 ): Parcelable

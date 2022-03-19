@@ -26,7 +26,6 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Text(text = "teste")
                     val repositoryClass = PostRepositoryClass()
                     val viewModel = ViewModelProvider(
                         this,

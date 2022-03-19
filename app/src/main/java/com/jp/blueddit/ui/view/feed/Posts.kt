@@ -22,8 +22,6 @@ fun Posts(
     pageIndex: Int,
     viewModel: FeedViewModel
 ) {
-    val context = LocalContext.current
-
     if (viewModel.lazyListState == null) {
         viewModel.lazyListState = rememberLazyListState()
     }
