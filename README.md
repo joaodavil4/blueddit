@@ -20,7 +20,7 @@
 - Shows each post as a card: author, relative time ("2 hours ago"), title, thumbnail and comment count.
 - **Infinite scroll**: requests the next page when the user gets within 3 items of the end of the list.
 - **Pull-to-refresh** to reset the feed.
-- **Full-screen image dialog**: tapping a thumbnail expands it.
+- **Full-screen image dialog**: tapping the author row of a post expands its thumbnail.
 
 ## Architecture
 
